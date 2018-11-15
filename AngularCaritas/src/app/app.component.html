@@ -2,8 +2,9 @@
   <mat-toolbar color="primary" class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
     <h1 class="example-app-name">Projekt Caritas</h1>
-    <mat-form-field id="userSelect">
-        <mat-select placeholder="Odaberi korisnika">
+    <div id="userSelect">
+      <mat-form-field >
+        <mat-select placeholder="Odaberi korisnika" >
           <mat-option >
             Djelatnik (master)
           </mat-option>
@@ -12,6 +13,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container"
