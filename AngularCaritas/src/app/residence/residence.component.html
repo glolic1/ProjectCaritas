@@ -1,3 +1,4 @@
+<div (selectedIndexChange)="_setDataSource($event)">
 <div class="filtering">
   <mat-form-field>
     <input matInput (keyup)="applyFilterSmjestaj($event.target.value)" placeholder="Pretraži">
@@ -5,7 +6,7 @@
 </div>
 <button mat-stroked-button color="primary">+  Dodaj smještaj</button>
 
-<table mat-table [dataSource] = "dataSourceSmjestaj" class="mat-elevation-z8" matSort>
+<table mat-table [dataSource]="dataSourceSmjestaj" class="mat-elevation-z8" #sort1="matSort" matSort>
       <ng-container matColumnDef="naziv">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv </th>
         <td mat-cell *matCellDef="let elementSmjestaj"> {{elementSmjestaj.naziv}} </td>
@@ -24,7 +25,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumnsSmjestaj"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsSmjestaj;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+<mat-paginator #paginator1 [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
 
 <div class="filtering">
   <mat-form-field>
@@ -32,7 +33,8 @@
   </mat-form-field>
 </div>
 <button mat-stroked-button color="primary">+  Dodaj sobu</button>
-<table mat-table [dataSource]="dataSourceSoba" class="mat-elevation-z8" matSort>
+
+<table mat-table [dataSource]="dataSourceSoba" class="mat-elevation-z8" #sort2="matSort" matSort>
       <ng-container matColumnDef="nazivSobe">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv Sobe </th>
         <td mat-cell *matCellDef="let elementSoba"> {{elementSoba.nazivSobe}} </td>
@@ -46,7 +48,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumnsSoba"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsSoba;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+<mat-paginator #paginator2 [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
 
 <div class="filtering">
   <mat-form-field>
@@ -54,7 +56,7 @@
   </mat-form-field>
 </div>
 <button mat-stroked-button color="primary">+  Krevet</button>
-<table mat-table [dataSource]="dataSourceKrevet" class="mat-elevation-z8" matSort>
+<table mat-table [dataSource]="dataSourceKrevet" class="mat-elevation-z8" #sort3="matSort" matSort>
       <ng-container matColumnDef="vrstaKrevet">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv Sobe </th>
         <td mat-cell *matCellDef="let elementKrevet"> {{elementKrevet.vrstaKrevet}} </td>
@@ -68,5 +70,5 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumnsKrevet"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumnsKrevet;"></tr>
 </table>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
-
+<mat-paginator #paginator3 [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+</div>
