@@ -1,6 +1,6 @@
 <div class="filtering">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraži">
+    <input matInput (keyup)="applyFilterSmjestaj($event.target.value)" placeholder="Pretraži">
   </mat-form-field>
 </div>
 <button mat-stroked-button color="primary">+  Dodaj smještaj</button>
@@ -28,13 +28,13 @@
 
 <div class="filtering">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraži">
+    <input matInput (keyup)="applyFilterSoba($event.target.value)" placeholder="Pretraži">
   </mat-form-field>
 </div>
 <button mat-stroked-button color="primary">+  Dodaj sobu</button>
 <table mat-table [dataSource]="dataSourceSoba" class="mat-elevation-z8" matSort>
       <ng-container matColumnDef="nazivSobe">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv Sobe</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv Sobe </th>
         <td mat-cell *matCellDef="let elementSoba"> {{elementSoba.nazivSobe}} </td>
       </ng-container>
     
@@ -47,3 +47,26 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumnsSoba;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
+<div class="filtering">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilterKrevet($event.target.value)" placeholder="Pretraži">
+  </mat-form-field>
+</div>
+<button mat-stroked-button color="primary">+  Krevet</button>
+<table mat-table [dataSource]="dataSourceKrevet" class="mat-elevation-z8" matSort>
+      <ng-container matColumnDef="vrstaKrevet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Naziv Sobe </th>
+        <td mat-cell *matCellDef="let elementKrevet"> {{elementKrevet.vrstaKrevet}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="opisKrevet">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Opis </th>
+        <td mat-cell *matCellDef="let elementKrevet"> {{elementKrevet.opisKrevet}} </td>
+      </ng-container>
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsKrevet"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsKrevet;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+
