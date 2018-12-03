@@ -10,6 +10,7 @@ import { ResidenceComponent } from './residence/residence.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { PocetnaComponent } from './pocetna/pocetna.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     UsersComponent,
     ResidenceComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PocetnaComponent
   ],
   imports: [
     BrowserModule,

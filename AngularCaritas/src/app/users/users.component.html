@@ -1,19 +1,8 @@
 <div class="filtering">
   <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="OIB">
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraži">
   </mat-form-field>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Ime">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Prezime">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Email">
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Postanski Broj">
-  </mat-form-field>
+  
 </div>
 <table mat-table [dataSource] = "dataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="position">
