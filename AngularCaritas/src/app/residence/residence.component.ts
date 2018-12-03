@@ -1,21 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatButton } from '@angular/material';
 
   export interface User {
     naziv:string;
     adresa:string;
     opis: string;
-    
   }
-  const ELEMENT_DATA: User[] = [
+  export interface Room{
+    nazivSobe:string;
+    opisSobe:string;
+  }
+  const ELEMENT_DATA_SMJESTAJ: User[] = [
     {naziv:'Crnomerec',adresa:'Ilica 200', opis:'stan'},
     {naziv:'Maksimir',adresa:'Maksimirska 200', opis:'stan'},
     {naziv:'Dubrava',adresa:'Ravnice 200', opis:'kuca'},
-    {naziv:'Dugave',adresa:'Vatikansa 200', opis:'stan'},
-
+    {naziv:'Dugave',adresa:'Vatikanska 200', opis:'stan'},
     
   ];
-
+  const ELEMENT_DATA_SOBA: Room[] =[
+    {nazivSobe:'neka soba', opisSobe:'lijepa soba'},
+    {nazivSobe:'jos jedna soba', opisSobe:'ne toliko lijepa soba'}
+  ];
 @Component({
   selector: 'app-residence',
   templateUrl: './residence.component.html',
@@ -28,16 +33,23 @@ export class ResidenceComponent implements OnInit {
   // @ViewChild(MatSort) sort:MatSort;
    constructor() { }
    ngOnInit() {
-     this.dataSource.paginator=this.paginator;
-     this.dataSource.sort=this.sort;
+     this.dataSourceSmjestaj.paginator=this.paginatorSmjestaj;
+     this.dataSourceSmjestaj.sort=this.sortSmjestaj;
+
+     this.dataSourceSoba.paginator=this.paginatorSoba;
+     this.dataSourceSoba.sort=this.sortSoba;
    }
    applyFilter(filterValue: string) {
-      this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.dataSourceSmjestaj.filter = filterValue.trim().toLowerCase();
+      this.dataSourceSoba.filter=filterValue.trim().toLowerCase();
    }
   
-  displayedColumns:string[]= ['naziv','adresa','opis'];
-  dataSource=new MatTableDataSource(ELEMENT_DATA);
-  @ViewChild(MatPaginator) paginator:MatPaginator;
-  @ViewChild(MatSort) sort:MatSort;
-
+  displayedColumnsSmjestaj:string[]= ['naziv','adresa','opis'];
+  displayedColumnsSoba:string[] = ['nazivSobe','opisSobe'];
+  dataSourceSmjestaj=new MatTableDataSource(ELEMENT_DATA_SMJESTAJ);
+  dataSourceSoba = new MatTableDataSource(ELEMENT_DATA_SOBA);
+  @ViewChild(MatPaginator) paginatorSmjestaj:MatPaginator;
+  @ViewChild(MatSort) sortSmjestaj:MatSort;
+  @ViewChild(MatPaginator) paginatorSoba:MatPaginator;
+  @ViewChild(MatSort) sortSoba:MatSort;
 }

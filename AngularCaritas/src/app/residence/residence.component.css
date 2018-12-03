@@ -9,3 +9,7 @@ mat-form-field{
     display:flex;
     justify-content: space-around;
 }
+button{
+    padding:10px;
+    margin-bottom: 10px;
+}
