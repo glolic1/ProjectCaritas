@@ -4,11 +4,20 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatButtonModule, MatMenuModule, MatSidenavModule, MatIconModule, MatToolbarModule,  MatListModule, MatSelectModule} from '@angular/material';
+import { MatButtonModule, MatMenuModule, MatSidenavModule, MatIconModule, MatToolbarModule,  MatListModule, MatSelectModule, MatTableModule, MatPaginator, MatPaginatorModule, MatSortModule, MatInputModule} from '@angular/material';
+import { UsersComponent } from './users/users.component';
+import { ResidenceComponent } from './residence/residence.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import {RouterModule} from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UsersComponent,
+    ResidenceComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +28,13 @@ import { MatButtonModule, MatMenuModule, MatSidenavModule, MatIconModule, MatToo
     MatIconModule,
     MatToolbarModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    RouterModule,
+    AppRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
