@@ -2,6 +2,8 @@ export interface User {
     oib: number;
     name: string;
     lastName: string;
-    email: string;  
-    pbr: number;
+    address: string;  
+    phoneNumber: number;
+    nationality: string;
+    gender: string;
   }

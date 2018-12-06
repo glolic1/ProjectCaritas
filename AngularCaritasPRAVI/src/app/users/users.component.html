@@ -75,7 +75,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator> -->
-<mat-card>
+ <!-- <mat-card>
   <mat-card-header>User list</mat-card-header>
   <mat-card-content>
 	<mat-list>
@@ -87,4 +87,60 @@
 	</mat-list>
   </mat-card-content>
 
-</mat-card>
+</mat-card> -->
+
+<button mat-stroked-button color="primary" class="addUser">+  Dodaj korisnika</button>
+
+  <div class="example-table-container mat-elevation-z8">
+
+    <table mat-table [dataSource]="users" class="example-table"
+           matSort matSortActive="oib" matSortDisableClear matSortDirection="asc">
+           
+      <ng-container matColumnDef="oib">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>OIB</th>
+        <td mat-cell *matCellDef="let user">{{user.oib}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime</th>
+        <td mat-cell *matCellDef="let user">{{user.name}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Prezime</th>
+        <td mat-cell *matCellDef="let user">{{user.lastName}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Adresa</th>
+        <td mat-cell *matCellDef="let user">{{user.address}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Broj mobitela</th>
+        <td mat-cell *matCellDef="let user">{{user.phoneNumber}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nationality">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Nacionalnost</th>
+        <td mat-cell *matCellDef="let user">{{user.nationality}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Spol</th>
+        <td mat-cell *matCellDef="let user">{{user.gender}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    
+    <mat-paginator [pageSizeOptions]="[5,10,20,30]"></mat-paginator>
+  </div>
+
+
+
+
+<!-- Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

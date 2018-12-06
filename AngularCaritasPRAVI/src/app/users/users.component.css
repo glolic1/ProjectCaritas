@@ -9,3 +9,6 @@ mat-form-field{
     display:flex;
     justify-content: space-around;
 }
+.addUser {
+    margin:20px;
+}
