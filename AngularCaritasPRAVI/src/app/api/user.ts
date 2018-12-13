@@ -1,4 +1,4 @@
-export interface User {
+export class User {
     oib: number;
     name: string;
     lastName: string;

@@ -7,7 +7,7 @@ import { User } from "./user";
 
 @Injectable()
 export class UserService{
-    public API = 'http://localhost:58253/api';
+    public API = 'http://localhost:55241/api';
     public USER_API = `${this.API}/users`;
     constructor(private http:HttpClient){}
 
