@@ -1,100 +1,11 @@
-<!-- <div class="filtering">
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraži">
-  </mat-form-field>
-  
-</div>
-<table mat-table [dataSource] = "dataSource" class="mat-elevation-z8" matSort>
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="oib">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> OIB </th>
-        <td mat-cell *matCellDef="let element"> {{element.oib}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ime </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezime </th>
-        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
-      </ng-container>
 
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="pbr">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Postanski broj </th>
-        <td mat-cell *matCellDef="let element"> {{element.pbr}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator> -->
-<!-- <div class="filtering">
-  <mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Pretraži">
-  </mat-form-field>
-  
-</div>
-<table mat-table [dataSource] = "dataSource" class="mat-elevation-z8" matSort>
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let user of users"> {{user.oib}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="oib">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> OIB </th>
-        <td mat-cell *matCellDef="let user of users"> {{user.name}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ime </th>
-        <td mat-cell *matCellDef="let user of users"> {{user.lastName}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Prezime </th>
-        <td mat-cell *matCellDef="let user of users"> {{user.email}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
-        <td mat-cell *matCellDef="let user of users"> {{user.pbr}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator> -->
- <!-- <mat-card>
-  <mat-card-header>User list</mat-card-header>
-  <mat-card-content>
-	<mat-list>
-  	<mat-list-item *ngFor="let user of users">
-    	<h3 mat-line>
-      	<p>{{user.oib}}</p>
-    	</h3>
-  	</mat-list-item>
-	</mat-list>
-  </mat-card-content>
-
-</mat-card> -->
 
 <button mat-stroked-button color="primary" class="addUser">+  Dodaj korisnika</button>
 
   <div class="example-table-container mat-elevation-z8">
 
-    <table mat-table [dataSource]="users" class="example-table"
-           matSort matSortActive="oib" matSortDisableClear  >
+    <table mat-table [dataSource]="data" class="example-table"
+           matSort matSort (matSortChange)="sortData($event)" [matSortActive]="sortActive" [matSortDirection]="sortDirection"  >
            
       <ng-container matColumnDef="oib">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>OIB</th>
@@ -123,20 +34,24 @@
 
       <ng-container matColumnDef="nationality">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Nacionalnost</th>
-        <td mat-cell *matCellDef="let user">{{user.nationality}}</td>
+        <td mat-cell *matCellDef="let user">{{user.nationality.name}}</td>
       </ng-container>
 
       <ng-container matColumnDef="gender">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Spol</th>
-        <td mat-cell *matCellDef="let user">{{user.gender}}</td>
+        <td mat-cell *matCellDef="let user">{{user.gender.name}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     
-    <mat-paginator [pageSizeOptions]="[5,10,20,30]" showFirstLastButtons></mat-paginator>
-  </div>
+    <mat-paginator 
+    [length]="resultsLength" 
+    [pageSize]="pageSize" 
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    [pageIndex]="pageIndex"
+    (page)="pageEvent = getServerData($event)"></mat-paginator>  </div>
 
 
 

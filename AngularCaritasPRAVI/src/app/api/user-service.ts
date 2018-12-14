@@ -11,9 +11,18 @@ export class UserService{
     public USER_API = `${this.API}/users`;
     constructor(private http:HttpClient){}
 
-    getAll(): Observable<Array<User>>{
-        return this.http.get<Array<User>>(this.USER_API);
+    getAll(pageIndex: number, pageSize: number, 
+        sortActive: string, sortDirection: string): Observable<Array<User>>{
+        
+            let url = this.USER_API + "?pageSize=" + pageSize.toString() + "&pageIndex=" + pageIndex.toString()
+            + "&sortColumn=" + sortActive + "&sortOrder=" + sortDirection;
+
+        return this.http.get<Array<User>>(url);
     }
+    public getCount(): Observable<number> {
+        let url = this.USER_API + "/Count";
+        return this.http.get<number>(url);
+      }
     get(id:string){
         return this.http.get(`${this.USER_API}/${id}`);
     }
