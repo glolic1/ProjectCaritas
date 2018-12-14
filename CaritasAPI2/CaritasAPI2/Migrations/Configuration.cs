@@ -5,14 +5,14 @@ namespace CaritasAPI2.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CaritasApi.Models.UserContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<CaritasAPI2.Models.UserContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(CaritasApi.Models.UserContext context)
+        protected override void Seed(CaritasAPI2.Models.UserContext context)
         {
             //  This method will be called after migrating to the latest version.
 

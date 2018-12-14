@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Web;
 using System.Data.Entity;
+using CaritasAPI2.Services;
 
-namespace CaritasApi.Models
+namespace CaritasAPI2.Models
 {
     public class UserContext : DbContext
     {
@@ -20,12 +21,14 @@ namespace CaritasApi.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().Property(t => t.name).IsRequired();
-            modelBuilder.Entity<User>().Property(t => t.name).HasMaxLength(20);
-            modelBuilder.Entity<User>().Property(t => t.lastName).IsRequired();
-            modelBuilder.Entity<User>().Property(t => t.lastName).HasMaxLength(30);
-            modelBuilder.Entity<User>().Property(t => t.oib).IsRequired();
+            modelBuilder.Entity<User>().Property(t => t.Name).IsRequired();
+            modelBuilder.Entity<User>().Property(t => t.Name).HasMaxLength(20);
+            modelBuilder.Entity<User>().Property(t => t.LastName).IsRequired();
+            modelBuilder.Entity<User>().Property(t => t.LastName).HasMaxLength(30);
+            modelBuilder.Entity<User>().Property(t => t.Oib).IsRequired();
 
         }
+
+        
     }
 }

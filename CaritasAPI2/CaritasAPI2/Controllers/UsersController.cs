@@ -1,119 +1,80 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
-using CaritasApi.Models;
+using CaritasAPI2.Models;
+using CaritasAPI2.SInterfaces;
+using CaritasAPI2.Views;
+using CaritasAPI2.Mappers;
+using CaritasAPI2.Services;
 
 namespace CaritasAPI2.Controllers
 {
     public class UsersController : ApiController
     {
+        private IUserService _service;
+        private UserMapper _mapper;
         private UserContext db = new UserContext();
 
+        public UsersController()
+        {
+            this._service = new UserService();
+            this._mapper = new UserMapper();
+        }
+
+
+
         // GET: api/Users
+        [HttpGet]
         public IQueryable<User> GetUsers()
         {
             return db.Users;
         }
 
-        // GET: api/Users/5
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> GetUser(int id)
-        {
-            User user = await db.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(user);
+        [HttpGet]
+        public IHttpActionResult Get(string pageIndex, string pageSize, string sortColumn, string sortOrder)
+        {
+            var result = _service.GetUserCollection(Int32.Parse(pageIndex), Int32.Parse(pageSize), sortColumn, sortOrder);
+            var response = _mapper.MapUserCollectionToBasicUserCollection(result);
+            return Ok(response);
         }
 
-        // PUT: api/Users/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUser(int id, User user)
+        [HttpGet]
+        [Route("api/Users/Count")]
+        public IHttpActionResult GetUserCount()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var result = _service.GetUserCount();
+            return Ok(result);
+        }
 
-            if (id != user.id)
+        // GET: api/Users/5
+        public IHttpActionResult GetUser(int id)
+        {
+            var result = _service.GetUser(id);
+            if (result == null)
             {
-                return BadRequest();
+                return BadRequest("Not found.");
             }
-
-            db.Entry(user).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            var response = _mapper.MapUserToBasicUser(result);
+            return Ok(response);
         }
 
         // POST: api/Users
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> PostUser(User user)
+        public void Post([FromBody]string value)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        }
 
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = user.id }, user);
+        // PUT: api/Users/5
+        public void Put(int id, [FromBody]string value)
+        {
         }
 
         // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> DeleteUser(int id)
+        public void Delete(int id)
         {
-            User user = await db.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            db.Users.Remove(user);
-            await db.SaveChangesAsync();
-
-            return Ok(user);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool UserExists(int id)
-        {
-            return db.Users.Count(e => e.id == id) > 0;
         }
     }
 }

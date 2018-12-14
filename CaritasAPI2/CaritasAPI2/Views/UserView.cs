@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CaritasAPI2.Models
+namespace CaritasAPI2.Views
 {
-    public class User
+    public class UserView
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -14,10 +14,7 @@ namespace CaritasAPI2.Models
 
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public virtual Gender Gender { get; set; }
-        public virtual Nationalities Nationality { get; set; }
-        public Nullable<int> NationalityID { get; set; }
-        public Nullable<int> GenderID { get; set; }
-
+        public GenderView Gender { get; set; }
+        public NationalityView Nationality { get; set; }
     }
 }

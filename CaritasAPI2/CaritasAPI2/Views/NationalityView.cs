@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CaritasAPI2.Models
+namespace CaritasAPI2.Views
 {
-    public class Nationalities
+    public class NationalityView
     {
         public int Id { get; set; }
         public string NationalityName { get; set; }
-
-        public ICollection<User> Users { get; set; }
     }
 }
