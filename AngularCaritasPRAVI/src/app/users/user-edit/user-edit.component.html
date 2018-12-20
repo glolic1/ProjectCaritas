@@ -1,0 +1,60 @@
+<div class="loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    
+    <div class="container mat-elevation-z8">
+      <form class="form-container">
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" matInput [formControl]="name" placeholder="Ime" required>
+          <mat-error *ngIf="firstName.hasError('required')">
+            Ime je obavezno
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" matInput [formControl]="lastName" placeholder="Prezime" required>
+          <mat-error *ngIf="lastName.hasError('required')">
+            Prezime je obavezno
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" matInput [formControl]="oib" placeholder="OIB" required maxlength="11">
+          <mat-error *ngIf="oib.hasError('required')">
+            OIB je obavezan
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" matInput [formControl]="address" placeholder="Adresa" required>
+          <mat-error *ngIf="username.hasError('required')">
+            Adresa
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" matInput [formControl]="phoneNumber" placeholder="Telefonski broj">
+        </mat-form-field>
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" placeholder="Odaberite nacionalnost" matInput [formControl]="nationality" required>
+            <mat-option *ngFor="let option of filteredCitizenships | async" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          <mat-error *ngIf="citizenship.hasError('required')">Državljanstvo je obavezno</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="form-field-container">
+          <input type="text" placeholder="Odaberite spol" matInput [formControl]="sex" [matAutocomplete]="autoSex" required>
+          <mat-autocomplete #autoSex="matAutocomplete">
+            <mat-option *ngFor="let option of filteredSexes | async" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="sex.hasError('required')">Spol je obavezan</mat-error>
+        </mat-form-field>
+    
+        <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Dodaj novog volontera</button>    
+      </form>
+    </div>

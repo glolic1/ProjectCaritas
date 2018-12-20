@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatMenuModule, MatSidenavModule, MatIconModule, MatToolbarModule,
     MatListModule, MatSelectModule, MatTableModule, MatPaginator,
-     MatPaginatorModule, MatSortModule, MatInputModule, MatButtonModule, MatCardModule} from '@angular/material';
+     MatPaginatorModule, MatSortModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule, MatDatepickerModule, MatCheckboxModule, MatAutocompleteModule, DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
 import { UsersComponent } from './users/users.component';
 import { ResidenceComponent } from './residence/residence.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -15,6 +15,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { UserService } from './api/user-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ResidenceService } from './api/residence-service';
 
 
 @NgModule({
@@ -23,11 +26,15 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     UsersComponent,
     ResidenceComponent,
     NotFoundComponent,
-    PocetnaComponent
+    PocetnaComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
     MatButtonModule,
     MatMenuModule,
     MatSidenavModule,
@@ -43,9 +50,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatProgressSpinnerModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
     HttpClientModule
   ],
-  providers: [UserService,HttpClient],
+  providers: [UserService,HttpClient, ResidenceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -11,5 +11,6 @@ namespace CaritasAPI2.SInterfaces
         List<User> GetUserCollection(int pageIndex, int pageSize, string sortColumn, string sortOrder);
         User GetUser(int ID);
         int GetUserCount();
+        bool AddUser(User user);
     }
 }

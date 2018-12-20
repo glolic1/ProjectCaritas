@@ -1,4 +1,4 @@
-<div (selectedIndexChange)="_setDataSource($event)">
+<!-- <div (selectedIndexChange)="_setDataSource($event)">
 <div class="filtering">
   <mat-form-field>
     <input matInput (keyup)="applyFilterSmjestaj($event.target.value)" placeholder="Pretraži">
@@ -71,4 +71,92 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumnsKrevet;"></tr>
 </table>
 <mat-paginator #paginator3 [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
+</div> -->
+
+
+
+<div class="example-table-container mat-elevation-z8">
+
+  <table mat-table [dataSource]="accommodations" class="example-table" matSort matSort (matSortChange)="sortData($event)"
+    [matSortActive]="sortActive" [matSortDirection]="sortDirection">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj smještaja</th>
+      <td mat-cell *matCellDef="let acc">{{acc.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="accommodationName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime smještaja</th>
+      <td mat-cell *matCellDef="let acc">{{acc.accommodationName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresa</th>
+      <td mat-cell *matCellDef="let acc">{{acc.address}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Opis</th>
+      <td mat-cell *matCellDef="let acc">{{acc.description}}</td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsAcc"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsAcc;"></tr>
+  </table>
 </div>
+  <mat-paginator></mat-paginator>
+
+
+  <div class="example-table-container mat-elevation-z8">
+
+      <table mat-table [dataSource]="rooms" class="example-table" matSort matSort (matSortChange)="sortData($event)"
+        [matSortActive]="sortActive" [matSortDirection]="sortDirection">
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Sobe</th>
+          <td mat-cell *matCellDef="let room">{{room.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="roomName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime smještaja</th>
+          <td mat-cell *matCellDef="let room">{{room.roomName}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Opis</th>
+          <td mat-cell *matCellDef="let room">{{room.description}}</td>
+        </ng-container>
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsRoom"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsRoom;"></tr>
+      </table>
+    </div>
+      <mat-paginator></mat-paginator>
+    
+      <div class="example-table-container mat-elevation-z8">
+    
+          <table mat-table [dataSource]="beds" class="example-table" matSort matSort (matSortChange)="sortData($event)"
+            [matSortActive]="sortActive" [matSortDirection]="sortDirection">
+        
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Kreveta</th>
+              <td mat-cell *matCellDef="let bed">{{bed.id}}</td>
+            </ng-container>
+            <ng-container matColumnDef="bedName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime kreveta</th>
+              <td mat-cell *matCellDef="let bed">{{bed.bedName}}</td>
+            </ng-container>
+        
+            
+        
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Opis </th>
+              <td mat-cell *matCellDef="let bed">{{bed.description}}</td>
+            </ng-container>
+        
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsBed"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsBed;"></tr>
+          </table>
+        
+          <mat-paginator></mat-paginator>

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "./user";
 
@@ -28,15 +28,22 @@ export class UserService{
     }
     save(user:User):Observable<User>{
         let result:Observable<User>;
-        if(user.oib){
+        if(user.id){
             result = this.http.put<User>(
-                `${this.USER_API}/${user.oib}`,
+                `${this.USER_API}/${user.id}`,
                 user
             );
         } else {
             result = this.http.post<User>(this.USER_API,user);
         }
         return result;
+    }
+    add(user:User):Observable<boolean>{
+        let headers = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+
+        return this.http.post<boolean>(this.USER_API, JSON.stringify(user), {headers: headers});
+
     }
     remove(id:number){
         return this.http.delete(`${this.USER_API}/${id.toString()}`);

@@ -63,10 +63,19 @@ namespace CaritasAPI2.Controllers
         }
 
         // POST: api/Users
-        public void Post([FromBody]string value)
+        public IHttpActionResult PostUser([FromBody] UserView user)
         {
+            var model = _mapper.MapUserViewToUser(user);
+            var result = _service.AddUser(model);
+            if (result)
+            {
+                return Ok();
+            }
+            else
+            {
+                return InternalServerError();
+            }
         }
-
         // PUT: api/Users/5
         public void Put(int id, [FromBody]string value)
         {

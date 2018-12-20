@@ -1,6 +1,6 @@
 
 
-<button mat-stroked-button color="primary" class="addUser">+  Dodaj korisnika</button>
+<button mat-stroked-button color="primary" class="addUser" routerLink="/korisnici-edit">+  Dodaj korisnika</button>
 
   <div class="example-table-container mat-elevation-z8">
 
@@ -34,12 +34,12 @@
 
       <ng-container matColumnDef="nationality">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Nacionalnost</th>
-        <td mat-cell *matCellDef="let user">{{user.nationality.name}}</td>
+        <td mat-cell *matCellDef="let user">{{user.nationality.nationalityName}}</td>
       </ng-container>
 
       <ng-container matColumnDef="gender">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Spol</th>
-        <td mat-cell *matCellDef="let user">{{user.gender.name}}</td>
+        <td mat-cell *matCellDef="let user">{{user.gender.genderName}}</td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -29,8 +29,6 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort:MatSort;
 
   constructor(private userService:UserService, private http:HttpClient) { } 
-  users:Array<User>;
-  dataSource = new MatTableDataSource(this.users);
 
   ngOnInit() {
     this.pageSize = 10;

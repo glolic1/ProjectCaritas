@@ -11,7 +11,9 @@ namespace CaritasAPI2.Models
     {
         public UserContext()
            : base("CaritasString")
-        { }
+        {
+            this.Configuration.LazyLoadingEnabled = true;
+        }
         public static UserContext Create()
         {
             return new UserContext();

@@ -45,5 +45,21 @@ namespace CaritasAPI2.Mappers
 
             return result;
         }
+
+        public User MapUserViewToUser(UserView view)
+        {
+            var result = new User()
+            {
+                Id = 0,
+                Name = view.Name,
+                LastName = view.LastName,
+                Oib = view.Oib,
+                NationalityID = view.Nationality.Id,
+                GenderID = view.Gender.Id,
+                Address = view.Address,
+                PhoneNumber = view.PhoneNumber
+            };
+            return result;
+        }
     }
 }

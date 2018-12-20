@@ -64,5 +64,18 @@ namespace CaritasAPI2.Services
             var query = _context.Users.SingleOrDefault(v => v.Id == ID);
             return query;
         }
+        public bool AddUser(User user)
+        {
+            try
+            {
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

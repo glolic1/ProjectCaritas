@@ -251,7 +251,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccommodationsController.cs" />
+    <Compile Include="Controllers\BedsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -269,9 +272,17 @@
     <Compile Include="Migrations\201812141636526_PopravakContexta.Designer.cs">
       <DependentUpon>201812141636526_PopravakContexta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812201305015_ResidenceModel.cs" />
+    <Compile Include="Migrations\201812201305015_ResidenceModel.Designer.cs">
+      <DependentUpon>201812201305015_ResidenceModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Accommodation.cs" />
+    <Compile Include="Models\Bed.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Nationalities.cs" />
+    <Compile Include="Models\ResidenceContext.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -378,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812141636526_PopravakContexta.resx">
       <DependentUpon>201812141636526_PopravakContexta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812201305015_ResidenceModel.resx">
+      <DependentUpon>201812201305015_ResidenceModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
