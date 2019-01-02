@@ -12,7 +12,7 @@ import { UserEditComponent } from "./users/user-edit/user-edit.component";
 
 const appRoutes : Routes = [
     {path:'korisnici', component: UsersComponent},
-    {path:'korisnici-edit', component: UserEditComponent},
+    {path:'korisnici-add', component: UserEditComponent},
     {path:'smjestaj', component: ResidenceComponent},
     {path:'pocetna', component:PocetnaComponent},
     {path: '', redirectTo: '/pocetna', pathMatch: 'full'},

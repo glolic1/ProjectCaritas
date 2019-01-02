@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatMenuModule, MatSidenavModule, MatIconModule, MatToolbarModule,
     MatListModule, MatSelectModule, MatTableModule, MatPaginator,
-     MatPaginatorModule, MatSortModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule, MatDatepickerModule, MatCheckboxModule, MatAutocompleteModule, DateAdapter, MAT_DATE_FORMATS} from '@angular/material';
+     MatPaginatorModule, MatSortModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressSpinnerModule, MatDatepickerModule, MatCheckboxModule, MatAutocompleteModule, DateAdapter, MAT_DATE_FORMATS, MatSnackBarModule} from '@angular/material';
 import { UsersComponent } from './users/users.component';
 import { ResidenceComponent } from './residence/residence.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -53,6 +53,7 @@ import { ResidenceService } from './api/residence-service';
     MatProgressSpinnerModule,
     MatCheckboxModule,
     MatAutocompleteModule,
+    MatSnackBarModule,
     HttpClientModule
   ],
   providers: [UserService,HttpClient, ResidenceService],

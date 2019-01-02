@@ -1,6 +1,6 @@
 export class Gender {
-    private Id: number;
-    private GenderName: string;
+    public Id: number;
+    public GenderName: string;
     
     constructor(ID: number, name: string) {
         this.Id = ID;

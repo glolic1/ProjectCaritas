@@ -20,7 +20,7 @@ namespace CaritasAPI2.Models
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Gender> Genders { get; set; }
-
+        public DbSet<Nationality> Nationalities{ get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().Property(t => t.Name).IsRequired();

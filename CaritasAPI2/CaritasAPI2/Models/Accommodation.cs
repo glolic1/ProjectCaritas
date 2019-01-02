@@ -11,5 +11,7 @@ namespace CaritasAPI2.Models
         public string AccommodationName { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+
+        public ICollection<Room> Rooms { get; set; }
     }
 }

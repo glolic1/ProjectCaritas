@@ -54,10 +54,10 @@ namespace CaritasAPI2.Mappers
                 Name = view.Name,
                 LastName = view.LastName,
                 Oib = view.Oib,
-                NationalityID = view.Nationality.Id,
-                GenderID = view.Gender.Id,
                 Address = view.Address,
-                PhoneNumber = view.PhoneNumber
+                PhoneNumber = view.PhoneNumber,
+                NationalityID = 1,
+                GenderID =1
             };
             return result;
         }

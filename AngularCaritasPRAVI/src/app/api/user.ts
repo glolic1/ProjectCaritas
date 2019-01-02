@@ -11,14 +11,14 @@ export class User {
     phoneNumber: number;
     nationality: Nationality;
     gender: Gender;
-    constructor(){}
-    // constructor(OIB:number, FirstName: string, LastName: string, Address: string, PhoneNumber:number,Nationality:Nationality,Gender:Gender){
-    //   this.oib=OIB;
-    //   this.name=FirstName;
-    //   this.lastName=LastName;
-    //   this.address=Address;
-    //   this.phoneNumber=PhoneNumber;
-    //   this.nationality=Nationality;
-    //   this.gender=Gender;
-    // }
+     constructor(id?:number,OIB?:number, FirstName?: string, LastName?: string, Address?: string, PhoneNumber?:number,Nationality?:Nationality,Gender?:Gender){
+       this.id=id;
+       this.oib=OIB;
+       this.name=FirstName;
+       this.lastName=LastName;
+       this.address=Address;
+       this.phoneNumber=PhoneNumber;
+       this.nationality=Nationality;
+       this.gender=Gender;
+     }
   }
