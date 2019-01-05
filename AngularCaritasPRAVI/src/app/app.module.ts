@@ -10,14 +10,15 @@ import { MatMenuModule, MatSidenavModule, MatIconModule, MatToolbarModule,
 import { UsersComponent } from './users/users.component';
 import { ResidenceComponent } from './residence/residence.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {RouterModule} from '@angular/router';
+import { RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { UserService } from './api/user-service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { UserEditComponent } from './users/user-add/user-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResidenceService } from './api/residence-service';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { UserAddUComponent } from './users/user-add-u/user-add-u.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ResidenceService } from './api/residence-service';
     ResidenceComponent,
     NotFoundComponent,
     PocetnaComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserAddUComponent
   ],
   imports: [
     BrowserModule,

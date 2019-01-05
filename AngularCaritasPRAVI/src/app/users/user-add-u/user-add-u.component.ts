@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/api/user';
-import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/api/user-service';
 import { FormControl } from '@angular/forms';
 import { Nationality } from 'src/app/api/nationality.model';
 import { Gender } from 'src/app/api/gender.model';
-import { MatSnackBar } from '@angular/material';
 import { GandNService } from 'src/app/api/gandn-service';
 
 @Component({
-  selector: 'app-user-edit',
-  templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  selector: 'app-user-add',
+  templateUrl: './user-add-u.component.html',
+  styleUrls: ['./user-add-u.component.css']
 })
-export class UserEditComponent implements OnInit {
+export class UserAddUComponent implements OnInit {
   name = new FormControl('');
   lastName = new FormControl('');
   oib = new FormControl('');

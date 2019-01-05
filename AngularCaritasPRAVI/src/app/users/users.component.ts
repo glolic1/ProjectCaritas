@@ -3,6 +3,7 @@ import { MatTableDataSource, MatPaginator, MatSort, PageEvent } from '@angular/m
 import { UserService } from '../api/user-service';
 import { User } from '../api/user';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -13,22 +14,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  displayedColumns: string[] = ['oib','name','lastName','address','phoneNumber','nationality','gender'];
+  displayedColumns: string[] = ['oib', 'name', 'lastName', 'address', 'phoneNumber', 'nationality', 'gender', 'actions'];
   resultsLength;
   data: User[];
-    pageEvent: PageEvent;
-    datasource: null;
-    pageIndex: number;
-    pageSize: number;
-    sortDirection: string;
-    sortActive: string;
-    isLoadingResults = false;
-    isRateLimitReached = false;
-  
-  @ViewChild(MatPaginator) paginator:MatPaginator;
-  @ViewChild(MatSort) sort:MatSort;
+  pageEvent: PageEvent;
+  datasource: null;
+  pageIndex: number;
+  pageSize: number;
+  sortDirection: string;
+  sortActive: string;
+  isLoadingResults = false;
+  isRateLimitReached = false;
 
-  constructor(private userService:UserService, private http:HttpClient) { } 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private userService: UserService, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.pageSize = 10;
@@ -39,12 +40,12 @@ export class UsersComponent implements OnInit {
 
     this.isLoadingResults = true;
     this.userService.getCount().subscribe(
-      (count)=>this.resultsLength=count
+      (count) => this.resultsLength = count
     );
     this.userService.getAll(this.pageIndex, this.pageSize, this.sortActive, this.sortDirection).subscribe(
-      (data)=>{
-        this.data=data;
-        this.isLoadingResults=false;
+      (data) => {
+        this.data = data;
+        this.isLoadingResults = false;
       }
     )
   }
@@ -52,26 +53,42 @@ export class UsersComponent implements OnInit {
     this.isLoadingResults = true;
 
     this.userService.getAll(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(
-        (data) => {
-            this.data = data;
-            this.isLoadingResults = false;
+      (data) => {
+        this.data = data;
+        this.isLoadingResults = false;
+
+      }
+    );
+  }
+  sortData(event: any) {
+    this.paginator.pageIndex = 0;
+
+    this.isLoadingResults = true;
+    this.userService.getAll(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(
+      (data) => {
+        this.data = data;
+        this.isLoadingResults = false;
+      }
+    );
+  }
+  deleteData(id: number) {
+    this.userService.delete(id).subscribe(
+      response => {
+        if (response) {
+          this.userService.getAll(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(
+            (data) => {
+              this.data = data;
+              this.isLoadingResults = false;
+            }
+          );
+        } else {
 
         }
-    );
-}
-sortData(event: any) {
-  this.paginator.pageIndex = 0;
-
-  this.isLoadingResults = true;
-  this.userService.getAll(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(
-      (data) => {
-          this.data = data;
-          this.isLoadingResults = false;
       }
-  );
+    )
+  }
+  editUser(id: number) {
+    this.router.navigate(['korisnici-edit', id]);
 
-}
-  applyFilter(filterValue: string) {
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
