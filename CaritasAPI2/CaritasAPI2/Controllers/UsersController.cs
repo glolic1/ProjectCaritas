@@ -77,13 +77,41 @@ namespace CaritasAPI2.Controllers
             }
         }
         // PUT: api/Users/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromBody] UserView user)
         {
+            var model = _mapper.MapUserViewToUser(user);
+            var result = _service.UpdateUser(model);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/Users/5
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            try
+            {
+                var volunteer = db.Users.SingleOrDefault(v => v.Id == id);
+                if (volunteer != null)
+                {
+                    db.Users.Remove(volunteer);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

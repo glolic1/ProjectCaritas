@@ -50,14 +50,14 @@ namespace CaritasAPI2.Mappers
         {
             var result = new User()
             {
-                Id = 0,
+                Id = view.Id,
                 Name = view.Name,
                 LastName = view.LastName,
                 Oib = view.Oib,
                 Address = view.Address,
                 PhoneNumber = view.PhoneNumber,
-                NationalityID = 1,
-                GenderID =1
+                NationalityID = view.Nationality.Id,
+                GenderID = view.Gender.Id
             };
             return result;
         }

@@ -77,5 +77,50 @@ namespace CaritasAPI2.Services
                 return false;
             }
         }
+        public bool DeleteUser(int ID)
+        {
+            try
+            {
+                var user = _context.Users.SingleOrDefault(v => v.Id == ID);
+                if (user != null)
+                {
+                    _context.Users.Remove(user);
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+        public bool UpdateUser(User user)
+        {
+            int id;
+            var nUser = _context.Users.SingleOrDefault(v => v.Id == user.Id);
+            id = user.Id;
+            nUser.Name = user.Name;
+            nUser.LastName = user.LastName;
+            nUser.Oib = user.Oib;
+            nUser.Address = user.Address;
+            nUser.NationalityID = user.NationalityID;
+            nUser.GenderID = user.GenderID;
+            nUser.PhoneNumber = user.PhoneNumber;
+
+            try
+            {
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

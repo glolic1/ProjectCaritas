@@ -12,5 +12,7 @@ namespace CaritasAPI2.SInterfaces
         User GetUser(int ID);
         int GetUserCount();
         bool AddUser(User user);
+        bool UpdateUser(User user);
+        bool DeleteUser(int ID);
     }
 }
