@@ -15,9 +15,17 @@ export class ResidenceService{
     constructor(private http:HttpClient){
 
     }
+    public getCount(): Observable<number> {
+        let url = this.ACCOMMODATIONS_API + "/Count";
+        return this.http.get<number>(url);
+    }
+    getAllAccommodations(pageIndex: number, pageSize: number,
+        sortActive: string, sortDirection: string): Observable<Array<Accommodation>> {
 
-    getAllAccommodations(): Observable<Array<Accommodation>> {
-        return this.http.get<Array<Accommodation>>(this.ACCOMMODATIONS_API);
+        let url = this.ACCOMMODATIONS_API + "?pageSize=" + pageSize.toString() + "&pageIndex=" + pageIndex.toString()
+            + "&sortColumn=" + sortActive + "&sortOrder=" + sortDirection;
+
+        return this.http.get<Array<Accommodation>>(url);
     }
     getAllRooms(): Observable<Array<Room>> {
         return this.http.get<Array<Room>>(this.ROOM_API);

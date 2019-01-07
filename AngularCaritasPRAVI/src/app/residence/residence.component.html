@@ -3,24 +3,24 @@
 
 <div class="example-table-container mat-elevation-z8">
 
-  <table mat-table [dataSource]="accommodations" class="example-table" matSort matSort (matSortChange)="sortData($event)"
+  <table mat-table [dataSource]="accommodations" class="example-table" matSort (matSortChange)="sortData($event)"
     [matSortActive]="sortActive" [matSortDirection]="sortDirection">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj smještaja</th>
       <td mat-cell *matCellDef="let acc">{{acc.id}}</td>
     </ng-container>
-    <ng-container matColumnDef="accommodationName">
+    <ng-container matColumnDef="AccommodationName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Ime smještaja</th>
       <td mat-cell *matCellDef="let acc">{{acc.accommodationName}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="address">
+    <ng-container matColumnDef="Address">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Adresa</th>
       <td mat-cell *matCellDef="let acc">{{acc.address}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="description">
+    <ng-container matColumnDef="Description">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Opis</th>
       <td mat-cell *matCellDef="let acc">{{acc.description}}</td>
     </ng-container>
@@ -30,10 +30,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumnsAcc;"></tr>
   </table>
 </div>
-  <mat-paginator></mat-paginator>
+<mat-paginator [length]="resultsLength" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]" [pageIndex]="pageIndex"
+    (page)="pageEvent = getServerData($event)"></mat-paginator>
 
 
-  <div class="example-table-container mat-elevation-z8">
+  <!-- <div class="example-table-container mat-elevation-z8">
 
       <table mat-table [dataSource]="rooms" class="example-table" matSort matSort (matSortChange)="sortData($event)"
         [matSortActive]="sortActive" [matSortDirection]="sortDirection">
@@ -85,4 +86,4 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumnsBed;"></tr>
           </table>
         
-          <mat-paginator></mat-paginator>
+          <mat-paginator></mat-paginator> -->

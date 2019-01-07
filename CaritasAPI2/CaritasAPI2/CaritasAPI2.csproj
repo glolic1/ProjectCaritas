@@ -260,6 +260,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\AccommodationMapper.cs" />
     <Compile Include="Mappers\GandNMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Migrations\201812131038141_initial.cs" />
@@ -300,10 +301,13 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccommodationService.cs" />
     <Compile Include="Services\GandNService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="SInterfaces\IAccommodationService.cs" />
     <Compile Include="SInterfaces\IGandNService.cs" />
     <Compile Include="SInterfaces\IUserService.cs" />
+    <Compile Include="Views\AccommodationView.cs" />
     <Compile Include="Views\GenderView.cs" />
     <Compile Include="Views\NationalityView.cs" />
     <Compile Include="Views\UserView.cs" />

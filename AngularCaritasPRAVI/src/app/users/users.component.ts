@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
   }
   sortData(event: any) {
     this.paginator.pageIndex = 0;
-
+    
     this.isLoadingResults = true;
     this.userService.getAll(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(
       (data) => {
@@ -75,6 +75,7 @@ export class UsersComponent implements OnInit {
     this.userService.delete(id).subscribe(
       response => {
         if (response) {
+          
           this.userService.getAll(this.paginator.pageIndex, this.paginator.pageSize, this.sort.active, this.sort.direction).subscribe(
             (data) => {
               this.data = data;
