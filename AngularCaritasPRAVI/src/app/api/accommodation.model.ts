@@ -1,6 +1,13 @@
 export class Accommodation{
-    private id: number;
-    private accommodationName: string;
-    private address: string;
-    private description: string;
+    public id: number;
+    public accommodationName: string;
+    public address: string;
+    public description: string;
+
+    constructor(idd?:number,accName?:string, add?: string, desc?: string){
+        this.id=idd;
+        this.accommodationName=accName;
+        this.address=add;
+        this.description=desc;
+    }
 }

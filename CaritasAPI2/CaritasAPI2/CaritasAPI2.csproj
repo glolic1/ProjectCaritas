@@ -261,7 +261,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mappers\AccommodationMapper.cs" />
+    <Compile Include="Mappers\BedMapper.cs" />
     <Compile Include="Mappers\GandNMapper.cs" />
+    <Compile Include="Mappers\RoomMapper.cs" />
     <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Migrations\201812131038141_initial.cs" />
     <Compile Include="Migrations\201812131038141_initial.Designer.cs">
@@ -291,6 +293,18 @@
     <Compile Include="Migrations\201901021036182_AddedRelationshipsForAccommodations2.Designer.cs">
       <DependentUpon>201901021036182_AddedRelationshipsForAccommodations2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901100934144_RoomFix.cs" />
+    <Compile Include="Migrations\201901100934144_RoomFix.Designer.cs">
+      <DependentUpon>201901100934144_RoomFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901100948306_BedFix.cs" />
+    <Compile Include="Migrations\201901100948306_BedFix.Designer.cs">
+      <DependentUpon>201901100948306_BedFix.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901101113430_AddedVirtualTOModels.cs" />
+    <Compile Include="Migrations\201901101113430_AddedVirtualTOModels.Designer.cs">
+      <DependentUpon>201901101113430_AddedVirtualTOModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\Bed.cs" />
@@ -302,14 +316,20 @@
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccommodationService.cs" />
+    <Compile Include="Services\BedService.cs" />
     <Compile Include="Services\GandNService.cs" />
+    <Compile Include="Services\RoomService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="SInterfaces\IBedService.cs" />
+    <Compile Include="SInterfaces\IRoomService.cs" />
     <Compile Include="SInterfaces\IAccommodationService.cs" />
     <Compile Include="SInterfaces\IGandNService.cs" />
     <Compile Include="SInterfaces\IUserService.cs" />
     <Compile Include="Views\AccommodationView.cs" />
+    <Compile Include="Views\BedView.cs" />
     <Compile Include="Views\GenderView.cs" />
     <Compile Include="Views\NationalityView.cs" />
+    <Compile Include="Views\RoomView.cs" />
     <Compile Include="Views\UserView.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +441,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901021036182_AddedRelationshipsForAccommodations2.resx">
       <DependentUpon>201901021036182_AddedRelationshipsForAccommodations2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901100934144_RoomFix.resx">
+      <DependentUpon>201901100934144_RoomFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901100948306_BedFix.resx">
+      <DependentUpon>201901100948306_BedFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901101113430_AddedVirtualTOModels.resx">
+      <DependentUpon>201901101113430_AddedVirtualTOModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

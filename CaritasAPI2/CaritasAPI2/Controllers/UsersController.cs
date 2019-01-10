@@ -96,10 +96,10 @@ namespace CaritasAPI2.Controllers
         {
             try
             {
-                var volunteer = db.Users.SingleOrDefault(v => v.Id == id);
-                if (volunteer != null)
+                var user = db.Users.SingleOrDefault(v => v.Id == id);
+                if (user != null)
                 {
-                    db.Users.Remove(volunteer);
+                    db.Users.Remove(user);
                     db.SaveChanges();
                     return true;
                 }

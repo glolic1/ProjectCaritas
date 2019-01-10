@@ -1,119 +1,117 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using CaritasAPI2.Models;
+using CaritasAPI2.SInterfaces;
+using CaritasAPI2.Views;
+using CaritasAPI2.Mappers;
+using CaritasAPI2.Services;
 
 namespace CaritasAPI2.Controllers
 {
     public class RoomsController : ApiController
     {
+        private IRoomService _service;
+        private RoomMapper _mapper;
         private ResidenceContext db = new ResidenceContext();
 
+        public RoomsController()
+        {
+            this._service = new RoomService();
+            this._mapper = new RoomMapper();
+        }
+
+
+
         // GET: api/Rooms
+        [HttpGet]
         public IQueryable<Room> GetRooms()
         {
             return db.Rooms;
         }
 
-        // GET: api/Rooms/5
-        [ResponseType(typeof(Room))]
-        public async Task<IHttpActionResult> GetRoom(int id)
-        {
-            Room room = await db.Rooms.FindAsync(id);
-            if (room == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(room);
+        [HttpGet]
+        public IHttpActionResult Get(string pageIndex, string pageSize, string sortColumn, string sortOrder)
+        {
+            var result = _service.GetRoomCollection(Int32.Parse(pageIndex), Int32.Parse(pageSize), sortColumn, sortOrder);
+            var response = _mapper.MapRoomCollectionToBasicRoomCollection(result);
+            return Ok(response);
         }
 
-        // PUT: api/Rooms/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutRoom(int id, Room room)
+        [HttpGet]
+        [Route("api/Rooms/Count")]
+        public IHttpActionResult GetRoomCount()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var result = _service.GetRoomCount();
+            return Ok(result);
+        }
 
-            if (id != room.Id)
+        // GET: api/Rooms/5
+        public IHttpActionResult GetRoom(int id)
+        {
+            var result = _service.GetRoom(id);
+            if (result == null)
             {
-                return BadRequest();
+                return BadRequest("Not found.");
             }
-
-            db.Entry(room).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RoomExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            var response = _mapper.MapRoomToBasicRoom(result);
+            return Ok(response);
         }
 
         // POST: api/Rooms
-        [ResponseType(typeof(Room))]
-        public async Task<IHttpActionResult> PostRoom(Room room)
+        public IHttpActionResult PostRoom([FromBody] RoomView room)
         {
-            if (!ModelState.IsValid)
+            var model = _mapper.MapRoomViewToRoom(room);
+            var result = _service.AddRoom(model);
+            if (result)
             {
-                return BadRequest(ModelState);
+                return Ok();
             }
-
-            db.Rooms.Add(room);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = room.Id }, room);
+            else
+            {
+                return InternalServerError();
+            }
+        }
+        // PUT: api/Rooms/5
+        public IHttpActionResult Put([FromBody] RoomView room)
+        {
+            var model = _mapper.MapRoomViewToRoom(room);
+            var result = _service.UpdateRoom(model);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/Rooms/5
-        [ResponseType(typeof(Room))]
-        public async Task<IHttpActionResult> DeleteRoom(int id)
+        public bool Delete(int id)
         {
-            Room room = await db.Rooms.FindAsync(id);
-            if (room == null)
+            try
             {
-                return NotFound();
+                var room = db.Rooms.SingleOrDefault(v => v.Id == id);
+                if (room != null)
+                {
+                    db.Rooms.Remove(room);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-
-            db.Rooms.Remove(room);
-            await db.SaveChangesAsync();
-
-            return Ok(room);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            catch (Exception e)
             {
-                db.Dispose();
+                return false;
             }
-            base.Dispose(disposing);
-        }
-
-        private bool RoomExists(int id)
-        {
-            return db.Rooms.Count(e => e.Id == id) > 0;
         }
     }
 }

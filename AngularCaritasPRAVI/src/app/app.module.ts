@@ -19,6 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResidenceService } from './api/residence-service';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
 import { UserAddUComponent } from './users/user-add-u/user-add-u.component';
+import { ResidenceAddComponent } from './residence/residence-add/residence-add.component';
+import { ResidenceEditComponent } from './residence/residence-edit/residence-edit.component';
+import { RoomAddComponent } from './residence/room-add/room-add.component';
+import { RoomEditComponent } from './residence/room-edit/room-edit.component';
 
 
 @NgModule({
@@ -29,7 +33,11 @@ import { UserAddUComponent } from './users/user-add-u/user-add-u.component';
     NotFoundComponent,
     PocetnaComponent,
     UserEditComponent,
-    UserAddUComponent
+    UserAddUComponent,
+    ResidenceAddComponent,
+    ResidenceEditComponent,
+    RoomAddComponent,
+    RoomEditComponent
   ],
   imports: [
     BrowserModule,

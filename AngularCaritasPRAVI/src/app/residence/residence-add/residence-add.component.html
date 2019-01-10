@@ -1,0 +1,27 @@
+<div class="container mat-elevation-z8">
+  <form class="form-container">
+
+    <mat-form-field class="form-field-container">
+      <input type="text" matInput [formControl]="name" placeholder="Ime" required>
+      <mat-error *ngIf="name.hasError('required')">
+        Ime je obavezno
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-container">
+      <input type="text" matInput [formControl]="address" placeholder="Adresa" required>
+      <mat-error *ngIf="address.hasError('required')">
+        Adresa je obvezna
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-container">
+      <input type="text" matInput [formControl]="description" placeholder="Opis" maxlength="11">
+      <!-- <mat-error *ngIf="oib.hasError('required')">
+        Opis je obvezan
+      </mat-error> -->
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Dodaj novi smještaj</button>
+  </form>
+</div>

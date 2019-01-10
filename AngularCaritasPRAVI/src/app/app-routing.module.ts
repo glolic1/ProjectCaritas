@@ -6,6 +6,8 @@ import { NotFoundComponent } from "./not-found/not-found.component";
 import {PocetnaComponent} from "./pocetna/pocetna.component";
 import { UserEditComponent } from "./users/user-edit/user-edit.component";
 import { UserAddUComponent } from "./users/user-add-u/user-add-u.component";
+import { ResidenceAddComponent } from "./residence/residence-add/residence-add.component";
+import { ResidenceEditComponent } from "./residence/residence-edit/residence-edit.component";
 
 
 
@@ -13,9 +15,12 @@ import { UserAddUComponent } from "./users/user-add-u/user-add-u.component";
 
 const appRoutes : Routes = [
     {path:'korisnici', component: UsersComponent},
-    { path:'korisnici-edit/:id', component: UserEditComponent},
+    {path:'korisnici-edit/:id', component: UserEditComponent},
     {path:'korisnici-add', component: UserAddUComponent},
     {path:'smjestaj', component: ResidenceComponent},
+    {path:'smjestaj-add', component: ResidenceAddComponent},
+    {path:'smjestaj-edit/:id', component: ResidenceEditComponent},
+
     {path:'pocetna', component:PocetnaComponent},
     {path: '', redirectTo: '/pocetna', pathMatch: 'full'},
     {path:'**', component: NotFoundComponent}

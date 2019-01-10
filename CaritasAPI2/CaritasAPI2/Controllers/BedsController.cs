@@ -1,119 +1,117 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 using CaritasAPI2.Models;
+using CaritasAPI2.SInterfaces;
+using CaritasAPI2.Views;
+using CaritasAPI2.Mappers;
+using CaritasAPI2.Services;
 
 namespace CaritasAPI2.Controllers
 {
     public class BedsController : ApiController
     {
+        private IBedService _service;
+        private BedMapper _mapper;
         private ResidenceContext db = new ResidenceContext();
 
+        public BedsController()
+        {
+            this._service = new BedService();
+            this._mapper = new BedMapper();
+        }
+
+
+
         // GET: api/Beds
+        [HttpGet]
         public IQueryable<Bed> GetBeds()
         {
             return db.Beds;
         }
 
-        // GET: api/Beds/5
-        [ResponseType(typeof(Bed))]
-        public async Task<IHttpActionResult> GetBed(int id)
-        {
-            Bed bed = await db.Beds.FindAsync(id);
-            if (bed == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(bed);
+        [HttpGet]
+        public IHttpActionResult Get(string pageIndex, string pageSize, string sortColumn, string sortOrder)
+        {
+            var result = _service.GetBedCollection(Int32.Parse(pageIndex), Int32.Parse(pageSize), sortColumn, sortOrder);
+            var response = _mapper.MapBedCollectionToBasicBedCollection(result);
+            return Ok(response);
         }
 
-        // PUT: api/Beds/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutBed(int id, Bed bed)
+        [HttpGet]
+        [Route("api/Beds/Count")]
+        public IHttpActionResult GetBedCount()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var result = _service.GetBedCount();
+            return Ok(result);
+        }
 
-            if (id != bed.Id)
+        // GET: api/Beds/5
+        public IHttpActionResult GetBed(int id)
+        {
+            var result = _service.GetBed(id);
+            if (result == null)
             {
-                return BadRequest();
+                return BadRequest("Not found.");
             }
-
-            db.Entry(bed).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BedExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            var response = _mapper.MapBedToBasicBed(result);
+            return Ok(response);
         }
 
         // POST: api/Beds
-        [ResponseType(typeof(Bed))]
-        public async Task<IHttpActionResult> PostBed(Bed bed)
+        public IHttpActionResult PostRoom([FromBody] BedView bed)
         {
-            if (!ModelState.IsValid)
+            var model = _mapper.MapBedViewToBed(bed);
+            var result = _service.AddBed(model);
+            if (result)
             {
-                return BadRequest(ModelState);
+                return Ok();
             }
-
-            db.Beds.Add(bed);
-            await db.SaveChangesAsync();
-
-            return CreatedAtRoute("DefaultApi", new { id = bed.Id }, bed);
+            else
+            {
+                return InternalServerError();
+            }
+        }
+        // PUT: api/Beds/5
+        public IHttpActionResult Put([FromBody] BedView bed)
+        {
+            var model = _mapper.MapBedViewToBed(bed);
+            var result = _service.UpdateBed(model);
+            if (result)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return InternalServerError();
+            }
         }
 
         // DELETE: api/Beds/5
-        [ResponseType(typeof(Bed))]
-        public async Task<IHttpActionResult> DeleteBed(int id)
+        public bool Delete(int id)
         {
-            Bed bed = await db.Beds.FindAsync(id);
-            if (bed == null)
+            try
             {
-                return NotFound();
+                var bed = db.Beds.SingleOrDefault(v => v.Id == id);
+                if (bed != null)
+                {
+                    db.Beds.Remove(bed);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-
-            db.Beds.Remove(bed);
-            await db.SaveChangesAsync();
-
-            return Ok(bed);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            catch (Exception e)
             {
-                db.Dispose();
+                return false;
             }
-            base.Dispose(disposing);
-        }
-
-        private bool BedExists(int id)
-        {
-            return db.Beds.Count(e => e.Id == id) > 0;
         }
     }
 }

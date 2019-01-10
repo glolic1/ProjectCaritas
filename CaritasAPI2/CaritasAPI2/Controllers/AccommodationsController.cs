@@ -44,7 +44,7 @@ namespace CaritasAPI2.Controllers
 
         [HttpGet]
         [Route("api/Accommodations/Count")]
-        public IHttpActionResult GetUserCount()
+        public IHttpActionResult GetAccommodationCount()
         {
             var result = _service.GetAccommodationCount();
             return Ok(result);
@@ -96,10 +96,10 @@ namespace CaritasAPI2.Controllers
         {
             try
             {
-                var volunteer = db.Accommodations.SingleOrDefault(v => v.Id == id);
-                if (volunteer != null)
+                var accommodation = db.Accommodations.SingleOrDefault(v => v.Id == id);
+                if (accommodation != null)
                 {
-                    db.Accommodations.Remove(volunteer);
+                    db.Accommodations.Remove(accommodation);
                     db.SaveChanges();
                     return true;
                 }

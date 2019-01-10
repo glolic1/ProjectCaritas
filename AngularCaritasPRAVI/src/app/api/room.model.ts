@@ -1,5 +1,8 @@
+import { Accommodation } from "./accommodation.model";
+
 export class Room{
-    private id: number;
-    private roomName: string;
-    private description: string;
+    public id: number;
+    public roomName: string;
+    public description: string;
+    public accommodation:Accommodation
 }
