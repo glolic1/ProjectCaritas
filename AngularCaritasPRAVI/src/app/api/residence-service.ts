@@ -23,6 +23,11 @@ export class ResidenceService{
         let url = this.ACCOMMODATIONS_API + "/Count";
         return this.http.get<number>(url);
     }
+    getAccommodations(): Observable<Accommodation[]>{
+        let url = this.ACCOMMODATIONS_API + "/All" ;
+
+        return this.http.get<Array<Accommodation>>(url);
+    }
     getAllAccommodations(pageIndex: number, pageSize: number,
         sortActive: string, sortDirection: string): Observable<Array<Accommodation>> {
 

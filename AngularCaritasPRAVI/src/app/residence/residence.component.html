@@ -2,8 +2,8 @@
 
 <div class="example-table-container mat-elevation-z8">
 
-  <table mat-table [dataSource]="accommodations" class="example-table" matSort (matSortChange)="sortDataAcc($event)"
-    [matSortActive]="sortActiveAcc" [matSortDirection]="sortDirectionAcc" #sortAcc>
+  <table mat-table #sortAcc="matSort" [dataSource]="accommodations" class="example-table" matSort (matSortChange)="sortDataAcc($event)"
+    [matSortActive]="sortActiveAcc" [matSortDirection]="sortDirectionAcc" >
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj smještaja</th>
@@ -42,11 +42,12 @@
 <mat-paginator #pagAcc [length]="resultsLengthAcc" [pageSize]="pageSizeAcc" [pageSizeOptions]="[5, 10, 25, 50]" [pageIndex]="pageIndexAcc"
   (page)="pageEventAcc = getAccServerData($event)"></mat-paginator>
 
+  <button mat-stroked-button color="primary" class="addUser" routerLink="/soba-add">+ Dodaj sobu</button>
 
 <div class="example-table-container mat-elevation-z8">
 
-  <table mat-table [dataSource]="rooms" class="example-table" matSort (matSortChange)="sortDataRoom($event)"
-    [matSortActive]="sortActiveRoom" [matSortDirection]="sortDirectionRoom" #sortRoom>
+  <table mat-table #sortRoom  ="matSort" [dataSource]="rooms" class="example-table" matSort (matSortChange)="sortDataRoom($event)"
+    [matSortActive]="sortActiveRoom" [matSortDirection]="sortDirectionRoom">
 
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Broj Sobe</th>

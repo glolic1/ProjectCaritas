@@ -62,8 +62,6 @@ export class UserAddUComponent implements OnInit {
       // user.nationality = this.nationality.value;
       // user.phoneNumber = this.phoneNumber.value;
       
-      console.log(this.nationalityCollection.find(option=>option.NationalityName = this.nationality.value));
-      console.log(this.genderCollection.find(option=>option.GenderName = this.gender.value));
       this.userService.add(user).subscribe(
         response => {this.gotoList()}
       );

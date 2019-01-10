@@ -48,8 +48,10 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
   @ViewChild('pagRoom') paginatorRoom: MatPaginator;
   @ViewChild('sortAcc') sortAcc: MatSort;
   @ViewChild('sortRoom') sortRoom: MatSort;
+
   constructor(private residenceService: ResidenceService,
     private router: Router) { }
+
   ngOnInit() {
     this.pageSizeAcc = 10;
     this.pageIndexAcc = 0;

@@ -1,3 +1,31 @@
-<p>
-  room-add works!
-</p>
+<div class="container mat-elevation-z8">
+  <form class="form-container">
+
+    <mat-form-field class="form-field-container">
+      <input type="text" matInput [formControl]="name" placeholder="Ime" required>
+      <mat-error *ngIf="name.hasError('required')">
+        Ime je obavezno
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field-container">
+      <input type="text" matInput [formControl]="description" placeholder="Opis" >
+      <!-- <mat-error *ngIf="oib.hasError('required')">
+        Opis je obvezan
+      </mat-error> -->
+    </mat-form-field>
+
+
+    <mat-form-field class="form-field-container">
+       <mat-select placeholder="Smještaj" [formControl]="accommodation">
+        <mat-option *ngFor="let acc of accommodationCollection" value="{{acc.id}}">
+          {{acc.accommodationName}}
+        </mat-option> 
+      </mat-select> 
+      <!-- <mat-error *ngIf="gender.hasError('required')">Spol je obavezan</mat-error> -->
+      <!-- <input type="text" matInput [formControl]="accommodation" placeholder="Smještaj" > -->
+    </mat-form-field>
+    
+    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Dodaj novu sobu</button>
+  </form>
+</div>
