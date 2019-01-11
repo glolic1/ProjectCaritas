@@ -10,6 +10,8 @@ import { ResidenceAddComponent } from "./residence/residence-add/residence-add.c
 import { ResidenceEditComponent } from "./residence/residence-edit/residence-edit.component";
 import { RoomAddComponent } from "./residence/room-add/room-add.component";
 import { RoomEditComponent } from "./residence/room-edit/room-edit.component";
+import { BedAddComponent } from "./residence/bed-add/bed-add.component";
+import { BedEditComponent } from "./residence/bed-edit/bed-edit.component";
 
 
 
@@ -24,6 +26,8 @@ const appRoutes : Routes = [
     {path:'smjestaj-edit/:id', component: ResidenceEditComponent},
     {path:'soba-add', component: RoomAddComponent},
     {path:'soba-edit/:id', component: RoomEditComponent},
+    {path:'krevet-add', component: BedAddComponent},
+    {path:'krevet-edit/:id', component: BedEditComponent},
 
     {path:'pocetna', component:PocetnaComponent},
     {path: '', redirectTo: '/pocetna', pathMatch: 'full'},

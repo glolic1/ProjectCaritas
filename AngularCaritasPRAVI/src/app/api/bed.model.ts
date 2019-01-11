@@ -1,5 +1,15 @@
+import { Room } from "./room.model";
+
 export class Bed{
-    private id: number;
-    private bedName: string;
-    private description: string;
+    public id: number;
+    public bedName: string;
+    public description: string;
+    public room:Room
+
+    constructor(idd?:number,bName?:string, desc?: string, rooom?:Room){
+        this.id=idd;
+        this.bedName=bName;
+        this.description=desc;
+        this.room=rooom;
+    }
 }

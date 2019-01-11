@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Accommodation } from 'src/app/api/accommodation.model';
+import { Room } from 'src/app/api/room.model';
+import { Bed } from 'src/app/api/bed.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResidenceService } from 'src/app/api/residence-service';
-import { Room } from 'src/app/api/room.model';
 
 @Component({
-  selector: 'app-room-edit',
-  templateUrl: './room-edit.component.html',
-  styleUrls: ['./room-edit.component.css']
+  selector: 'app-bed-edit',
+  templateUrl: './bed-edit.component.html',
+  styleUrls: ['./bed-edit.component.css']
 })
-export class RoomEditComponent implements OnInit {
+export class BedEditComponent implements OnInit {
 
   name = new FormControl('');
   description = new FormControl('');
-  accommodation = new FormControl('');
-  accommodationCollection: Array<Accommodation>;
-  room = new Room();
+  rooom = new FormControl('');
+  roomCollection: Array<Room>;
+  bed = new Bed();
 
 
   constructor(private route: ActivatedRoute,
@@ -24,17 +24,17 @@ export class RoomEditComponent implements OnInit {
     private residenceService: ResidenceService) { }
 
   ngOnInit() {
-    this.residenceService.getAccommodations().subscribe(
+    this.residenceService.getRooms().subscribe(
       data => {
-        this.accommodationCollection = data;
+        this.roomCollection = data;
       }
     );
     this.route.params.subscribe(params => {
-      this.residenceService.getRoom(params["id"]).subscribe(data => {
-        this.room.id = data.id;
-        this.room.roomName = data.roomName;
-        this.room.description = data.description;
-        this.room.accommodation = data.accommodation;
+      this.residenceService.getBed(params["id"]).subscribe(data => {
+        this.bed.id = data.id;
+        this.bed.bedName = data.bedName;
+        this.bed.description = data.description;
+        this.bed.room = data.room;
 
         
         this.setValues();
@@ -42,17 +42,17 @@ export class RoomEditComponent implements OnInit {
     })
   }
   private setValues() {
-    this.name.setValue(this.room.roomName);
-    this.description.setValue(this.room.description);
+    this.name.setValue(this.bed.bedName);
+    this.description.setValue(this.bed.description);
     
   }
   gotoList() {
     this.router.navigate(['/smjestaj']);
   }
   onSubmit() {
-    if (this.name.valid && this.accommodation.valid && this.description.valid) {
-      let room = new Room(this.room.id, this.name.value, this.description.value, 
-        this.accommodationCollection.find(option=>option.id = this.accommodation.value));
+    if (this.name.valid && this.rooom.valid && this.description.valid) {
+      let bed = new Bed(this.bed.id, this.name.value, this.description.value, 
+        this.roomCollection.find(option=>option.id = this.rooom.value));
       // null, this.name.value, this.lastName.value, this.oib.value,
       //   this.address.value, this.nationality.value, this.gender.value
       // user.id=null;
@@ -64,13 +64,13 @@ export class RoomEditComponent implements OnInit {
       // user.nationality = this.nationality.value;
       // user.phoneNumber = this.phoneNumber.value;
       
-      this.residenceService.updateRoom(room).subscribe(
+      this.residenceService.updateBed(bed).subscribe(
         response => { this.gotoList() }
       );
     }
     else {
       this.name.markAsTouched();
-      this.accommodation.markAsTouched();
+      this.rooom.markAsTouched();
       this.description.markAsTouched();
     }
   }

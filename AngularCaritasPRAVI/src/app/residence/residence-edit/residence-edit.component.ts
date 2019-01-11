@@ -66,5 +66,8 @@ export class ResidenceEditComponent implements OnInit {
       this.description.markAsTouched();
     }
   }
+  back(){
+    this.router.navigate(['/smjestaj']);
 
+  }
 }

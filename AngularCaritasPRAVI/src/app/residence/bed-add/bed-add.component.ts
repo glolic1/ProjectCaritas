@@ -1,35 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Room } from 'src/app/api/room.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Accommodation } from 'src/app/api/accommodation.model';
 import { ResidenceService } from 'src/app/api/residence-service';
+import { Bed } from 'src/app/api/bed.model';
 
 @Component({
-  selector: 'app-residence-add',
-  templateUrl: './residence-add.component.html',
-  styleUrls: ['./residence-add.component.css']
+  selector: 'app-bed-add',
+  templateUrl: './bed-add.component.html',
+  styleUrls: ['./bed-add.component.css']
 })
-export class ResidenceAddComponent implements OnInit {
+export class BedAddComponent implements OnInit {
 
   name = new FormControl('');
-  address = new FormControl('');
   description = new FormControl('');
+  rooom = new FormControl('');
+  roomCollection: Array<Room>;
 
-  
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private residenceService:ResidenceService){}
+    private residenceService: ResidenceService) { }
 
   ngOnInit() {
-    
+    this.residenceService.getRooms().subscribe(
+      data => {
+        this.roomCollection = data;
+      }
+    );
   }
   gotoList() {
     this.router.navigate(['/smjestaj']);
   }
-  onSubmit(){
-    if (this.name.valid && this.address.valid && this.description.valid) {
-      let accommodation = new Accommodation(null, this.name.value,this.address.value,this.description.value);
+  onSubmit() {
+    if (this.name.valid && this.rooom.valid && this.description.valid) {
+      let bed = new Bed(null, this.name.value, this.description.value, 
+        this.roomCollection.find(option=>option.id = this.rooom.value));
       // null, this.name.value, this.lastName.value, this.oib.value,
       //   this.address.value, this.nationality.value, this.gender.value
       // user.id=null;
@@ -41,13 +47,13 @@ export class ResidenceAddComponent implements OnInit {
       // user.nationality = this.nationality.value;
       // user.phoneNumber = this.phoneNumber.value;
       
-      this.residenceService.addAccommodation(accommodation).subscribe(
-        response => {this.gotoList()}
+      this.residenceService.addBed(bed).subscribe(
+        response => { this.gotoList() }
       );
     }
     else {
       this.name.markAsTouched();
-      this.address.markAsTouched();
+      this.rooom.markAsTouched();
       this.description.markAsTouched();
     }
   }

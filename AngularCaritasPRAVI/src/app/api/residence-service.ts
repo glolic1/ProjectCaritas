@@ -16,9 +16,7 @@ export class ResidenceService{
 
     }
     
-    getAllBeds(): Observable<Array<Bed>> {
-        return this.http.get<Array<Bed>>(this.BED_API);
-    }
+    
     public getAccCount(): Observable<number> {
         let url = this.ACCOMMODATIONS_API + "/Count";
         return this.http.get<number>(url);
@@ -62,7 +60,13 @@ export class ResidenceService{
 
         return this.http.get<Accommodation>(url);
     }
+   
     //ROOMS
+    getRooms(): Observable<Room[]>{
+        let url = this.ROOM_API + "/All" ;
+
+        return this.http.get<Array<Room>>(url);
+    }
     public getRoomCount(): Observable<number> {
         let url = this.ROOM_API + "/Count";
         return this.http.get<number>(url);
@@ -100,5 +104,44 @@ export class ResidenceService{
         let url = this.ROOM_API + '/' + id.toString();
 
         return this.http.get<Room>(url);
+    }
+     //BEDS
+     public getBedCount(): Observable<number> {
+        let url = this.BED_API + "/Count";
+        return this.http.get<number>(url);
+    }
+    getAllBeds(pageIndex: number, pageSize: number,
+        sortActive: string, sortDirection: string): Observable<Array<Bed>> {
+
+        let url = this.BED_API + "?pageSize=" + pageSize.toString() + "&pageIndex=" + pageIndex.toString()
+            + "&sortColumn=" + sortActive + "&sortOrder=" + sortDirection;
+
+        return this.http.get<Array<Bed>>(url);
+    }
+    addBed(bed:Bed): Observable<boolean> {
+        let headers = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+
+        return this.http.post<boolean>(this.BED_API, JSON.stringify(bed), { headers: headers });
+
+    }
+    
+    public deleteBed(id: number): Observable<boolean> {
+        let params = new HttpParams();
+        params = params.append("id", id.toString());
+
+        return this.http.delete<boolean>(this.BED_API, { params: params });
+    }
+    public updateBed(bed:Bed): Observable<boolean> {
+        let headers = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+
+        return this.http.put<boolean>(this.BED_API, JSON.stringify(bed), { headers: headers });
+
+    }
+    public getBed(id: number): Observable<Bed> {
+        let url = this.BED_API + '/' + id.toString();
+
+        return this.http.get<Bed>(url);
     }
 }

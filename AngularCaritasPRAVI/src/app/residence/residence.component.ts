@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
   templateUrl: './residence.component.html',
   styleUrls: ['./residence.component.css']
 })
-export class ResidenceComponent implements OnInit, AfterViewInit {
+export class ResidenceComponent implements OnInit {
   displayedColumnsAcc: string[] = ['id', 'AccommodationName', 'Address', 'Description', 'actions'];
   displayedColumnsRoom: string[] = ['id', 'RoomName', 'Description', 'Smjestaj', 'actions'];
-  displayedColumnsBed: string[] = ['id', 'bedName', 'description'];
+  displayedColumnsBed: string[] = ['id', 'bedName', 'description','Soba','actions'];
   // dataSource = new MatTableDataSource(ELEMENT_DATA);
   // @ViewChild(MatPaginator) paginator:MatPaginator;
   // @ViewChild(MatSort) sort:MatSort;  
@@ -27,9 +27,11 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
   beds: Bed[];
   resultsLengthAcc;
   resultsLengthRoom;
+  resultsLengthBed;
 
   pageEventAcc: PageEvent;
   pageEventRoom: PageEvent;
+  pageEventBed: PageEvent
 
   pageIndexAcc: number;
   pageSizeAcc: number;
@@ -41,6 +43,11 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
   sortDirectionRoom: string;
   sortActiveRoom: string;
 
+  pageIndexBed: number;
+  pageSizeBed: number;
+  sortDirectionBed: string;
+  sortActiveBed: string;
+
   isLoadingResults = false;
   isRateLimitReached = false;
 
@@ -48,6 +55,8 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
   @ViewChild('pagRoom') paginatorRoom: MatPaginator;
   @ViewChild('sortAcc') sortAcc: MatSort;
   @ViewChild('sortRoom') sortRoom: MatSort;
+  @ViewChild('pagBed') paginatorBed: MatPaginator;
+  @ViewChild('sortBed') sortBed: MatSort;
 
   constructor(private residenceService: ResidenceService,
     private router: Router) { }
@@ -59,15 +68,23 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
     this.sortDirectionAcc = "asc";
 
     this.pageSizeRoom = 10;
-    this.pageIndexRoom= 0;
+    this.pageIndexRoom = 0;
     this.sortActiveRoom = "id";
     this.sortDirectionRoom = "asc";
+
+    this.pageSizeBed = 10;
+    this.pageIndexBed = 0;
+    this.sortActiveBed = "id";
+    this.sortDirectionBed = "asc";
 
     this.residenceService.getAccCount().subscribe(
       (countAcc) => this.resultsLengthAcc = countAcc
     );
     this.residenceService.getRoomCount().subscribe(
       (countRoom) => this.resultsLengthRoom = countRoom
+    );
+    this.residenceService.getBedCount().subscribe(
+      (countBed) => this.resultsLengthBed = countBed
     );
     this.residenceService.getAllAccommodations(this.pageIndexAcc, this.pageSizeAcc, this.sortActiveAcc, this.sortDirectionAcc).subscribe(
       (data) => {
@@ -77,13 +94,12 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
       (data) => {
         this.rooms = data;
       });
-    this.residenceService.getAllBeds().subscribe(data2 => {
-      this.beds = data2;
-    });
+    this.residenceService.getAllBeds(this.pageIndexBed, this.pageSizeBed, this.sortActiveBed, this.sortDirectionBed).subscribe(
+      (data) => {
+        this.beds = data;
+      });
   }
-  ngAfterViewInit() {
-
-  }
+  
   getAccServerData(event: PageEvent) {
     this.isLoadingResults = true;
 
@@ -94,7 +110,7 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
 
       }
     );
-    
+
   }
   getRoomServerData(event: PageEvent) {
     this.isLoadingResults = true;
@@ -103,10 +119,18 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
       (data) => {
         this.rooms = data;
         this.isLoadingResults = false;
-
       }
     );
-    
+  }
+  getBedServerData(event:PageEvent){
+    this.isLoadingResults=true;
+
+    this.residenceService.getAllBeds(this.paginatorBed.pageIndex, this.paginatorBed.pageSize, this.sortBed.active, this.sortBed.direction).subscribe(
+      (data)=>{
+        this.beds=data;
+        this.isLoadingResults=false;
+      }
+    )
   }
   sortDataAcc(event: any) {
     this.paginatorAcc.pageIndex = 0;
@@ -126,6 +150,17 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
     this.residenceService.getAllRooms(this.paginatorRoom.pageIndex, this.paginatorRoom.pageSize, this.sortRoom.active, this.sortRoom.direction).subscribe(
       (data) => {
         this.rooms = data;
+        this.isLoadingResults = false;
+      }
+    );
+  }
+  sortDataBed(event: any) {
+    this.paginatorBed.pageIndex = 0;
+
+    this.isLoadingResults = true;
+    this.residenceService.getAllBeds(this.paginatorBed.pageIndex, this.paginatorBed.pageSize, this.sortBed.active, this.sortBed.direction).subscribe(
+      (data) => {
+        this.beds = data;
         this.isLoadingResults = false;
       }
     );
@@ -156,7 +191,7 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
       response => {
         if (response) {
 
-          this.residenceService.getAllRooms(this.paginatorAcc.pageIndex, this.paginatorAcc.pageSize, this.sortRoom.active, this.sortRoom.direction).subscribe(
+          this.residenceService.getAllRooms(this.paginatorRoom.pageIndex, this.paginatorRoom.pageSize, this.sortRoom.active, this.sortRoom.direction).subscribe(
             (data) => {
               this.rooms = data;
               this.isLoadingResults = false;
@@ -168,8 +203,29 @@ export class ResidenceComponent implements OnInit, AfterViewInit {
       }
     )
   }
-  editRooms(id: number) {
+  editRoom(id: number) {
     this.router.navigate(['soba-edit', id]);
+
+  }
+  deleteBedData(id: number) {
+    this.residenceService.deleteBed(id).subscribe(
+      response => {
+        if (response) {
+
+          this.residenceService.getAllBeds(this.paginatorBed.pageIndex, this.paginatorBed.pageSize, this.sortBed.active, this.sortBed.direction).subscribe(
+            (data) => {
+              this.beds = data;
+              this.isLoadingResults = false;
+            }
+          );
+        } else {
+
+        }
+      }
+    )
+  }
+  editBed(id: number) {
+    this.router.navigate(['krevet-edit', id]);
 
   }
 }

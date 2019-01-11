@@ -17,16 +17,16 @@
   
   
       <mat-form-field class="form-field-container">
-         <mat-select placeholder="Smještaj" [formControl]="accommodation">
-          <mat-option *ngFor="let acc of accommodationCollection" value="{{acc.id}}">
-            {{acc.accommodationName}}
+         <mat-select placeholder="Soba" [formControl]="rooom">
+          <mat-option *ngFor="let room of roomCollection" value="{{room.id}}">
+            {{room.roomName}}
           </mat-option> 
         </mat-select> 
         <!-- <mat-error *ngIf="gender.hasError('required')">Spol je obavezan</mat-error> -->
         <!-- <input type="text" matInput [formControl]="accommodation" placeholder="Smještaj" > -->
       </mat-form-field>
       
-      <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Uredi sobu</button>
+      <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Uredi krevet</button>
       <button type="submit" mat-raised-button color="primary" (click)="back()">Nazad</button>
 
     </form>

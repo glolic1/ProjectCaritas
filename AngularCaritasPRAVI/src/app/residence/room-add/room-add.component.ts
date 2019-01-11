@@ -57,4 +57,8 @@ export class RoomAddComponent implements OnInit {
       this.description.markAsTouched();
     }
   }
+  back(){
+    this.router.navigate(['/smjestaj']);
+
+  }
 }

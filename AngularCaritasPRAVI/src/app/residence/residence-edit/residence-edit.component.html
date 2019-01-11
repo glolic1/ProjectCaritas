@@ -16,12 +16,14 @@
     </mat-form-field>
 
     <mat-form-field class="form-field-container">
-      <input type="text" matInput [formControl]="description" placeholder="Opis" maxlength="11">
+      <input type="text" matInput [formControl]="description" placeholder="Opis">
       <!-- <mat-error *ngIf="oib.hasError('required')">
         Opis je obvezan
       </mat-error> -->
     </mat-form-field>
 
-    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Dodaj novi smještaj</button>
+    <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">Uredi smještaj</button>
+    <button type="submit" mat-raised-button color="primary" (click)="back()">Nazad</button>
+
   </form>
 </div>

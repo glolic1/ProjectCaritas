@@ -23,6 +23,8 @@ import { ResidenceAddComponent } from './residence/residence-add/residence-add.c
 import { ResidenceEditComponent } from './residence/residence-edit/residence-edit.component';
 import { RoomAddComponent } from './residence/room-add/room-add.component';
 import { RoomEditComponent } from './residence/room-edit/room-edit.component';
+import { BedAddComponent } from './residence/bed-add/bed-add.component';
+import { BedEditComponent } from './residence/bed-edit/bed-edit.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { RoomEditComponent } from './residence/room-edit/room-edit.component';
     ResidenceAddComponent,
     ResidenceEditComponent,
     RoomAddComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    BedAddComponent,
+    BedEditComponent
   ],
   imports: [
     BrowserModule,
