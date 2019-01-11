@@ -21,7 +21,11 @@ namespace CaritasAPI2.Services
             var query = _context.Accommodations.Count();
             return query;
         }
-
+        public IEnumerable<Accommodation> GetAccs()
+        {
+            var query = _context.Accommodations.OrderBy(s => s.AccommodationName);
+            return query.ToList();
+        }
         public List<Accommodation> GetAccommodationCollection(int pageIndex, int pageSize, string sortColumn, string sortOrder)
         {
             var query = SortAccommodationCollection(sortColumn, sortOrder);

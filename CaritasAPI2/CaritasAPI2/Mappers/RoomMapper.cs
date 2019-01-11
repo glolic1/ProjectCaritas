@@ -39,6 +39,15 @@ namespace CaritasAPI2.Mappers
 
             return result;
         }
+        public IEnumerable<RoomView> MapRoomModelCollectionToModelViewCollection(IEnumerable<Room> rooms)
+        {
+            var result = new List<RoomView>();
+            foreach (Room room in rooms)
+            {
+                result.Add(MapRoomToBasicRoom(room));
+            }
+            return result;
+        }
 
         public Room MapRoomViewToRoom(RoomView room)
         {

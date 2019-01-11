@@ -15,5 +15,6 @@ namespace CaritasAPI2.SInterfaces
         bool AddRoom(Room room);
         bool UpdateRoom(Room room);
         bool DeleteRoom(int ID);
+        IEnumerable<Room> GetRooms();
     }
 }

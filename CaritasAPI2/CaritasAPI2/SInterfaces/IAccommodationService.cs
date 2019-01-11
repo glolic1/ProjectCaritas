@@ -15,5 +15,6 @@ namespace CaritasAPI2.SInterfaces
         bool AddAccommodation(Accommodation accommodation);
         bool UpdateAccommodation(Accommodation accommodation);
         bool DeleteAccommodation(int ID);
+        IEnumerable<Accommodation> GetAccs();
     }
 }

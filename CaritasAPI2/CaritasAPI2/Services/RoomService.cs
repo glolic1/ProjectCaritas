@@ -59,6 +59,11 @@ namespace CaritasAPI2.Services
             var query = _context.Rooms.SingleOrDefault(v => v.Id == ID);
             return query;
         }
+        public IEnumerable<Room> GetRooms()
+        {
+            var query = _context.Rooms.OrderBy(s => s.RoomName);
+            return query.ToList();
+        }
         public bool AddRoom(Room room)
         {
             try

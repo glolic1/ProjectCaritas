@@ -42,9 +42,9 @@ namespace CaritasAPI2.Services
             {
                 case "id":
                     return sortColumn.Equals("asc") ? _context.Beds.OrderBy(v => v.Id) : _context.Beds.OrderByDescending(v => v.BedName);
-                case "BedName":
+                case "bedName":
                     return sortOrder.Equals("asc") ? _context.Beds.OrderBy(v => v.BedName) : _context.Beds.OrderByDescending(v => v.BedName);
-                case "Description":
+                case "description":
                     return sortOrder.Equals("asc") ? _context.Beds.OrderBy(v => v.Description) : _context.Beds.OrderByDescending(v => v.Description);
 
 

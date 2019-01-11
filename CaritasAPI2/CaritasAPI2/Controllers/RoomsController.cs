@@ -26,11 +26,15 @@ namespace CaritasAPI2.Controllers
 
 
 
-        // GET: api/Rooms
+        // GET: api/Users
         [HttpGet]
-        public IQueryable<Room> GetRooms()
+        [Route("api/Rooms/All")]
+
+        public IEnumerable<RoomView> GetAccommodations()
         {
-            return db.Rooms;
+            var result = _service.GetRooms();
+            var response = _mapper.MapRoomModelCollectionToModelViewCollection(result);
+            return response;
         }
 
 

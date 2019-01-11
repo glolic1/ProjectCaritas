@@ -10,8 +10,9 @@ namespace CaritasAPI2.Models
         public int Id { get; set; }
         public string BedName { get; set; }
         public string Description { get; set; }
-        public Nullable<int> RoomID { get; set; }
 
         public virtual Room Room { get; set; }
+        public Nullable<int> RoomID { get; set; }
+
     }
 }

@@ -28,9 +28,13 @@ namespace CaritasAPI2.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IQueryable<Accommodation> GetAccommodations()
+        [Route("api/Accommodations/All")]
+
+        public IEnumerable<AccommodationView> GetAccommodations()
         {
-            return db.Accommodations;
+            var result = _service.GetAccs();
+            var response = _mapper.MapAccommodationModelCollectionToAcommodationViewCollection(result);
+            return response;
         }
 
 

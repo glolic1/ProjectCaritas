@@ -34,6 +34,15 @@ namespace CaritasAPI2.Mappers
 
             return result;
         }
+        public IEnumerable<AccommodationView> MapAccommodationModelCollectionToAcommodationViewCollection(IEnumerable<Accommodation> accommodations)
+        {
+            var result = new List<AccommodationView>();
+            foreach (Accommodation accommodation in accommodations)
+            {
+                result.Add(MapAccommodationToBasicAccommodation(accommodation));
+            }
+            return result;
+        }
 
         public Accommodation MapAccommodationViewToAccommodation(AccommodationView accommodation)
         {

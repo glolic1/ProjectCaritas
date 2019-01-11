@@ -20,9 +20,15 @@ namespace CaritasAPI2.Mappers
                 {
                     Id = bed.Room.Id,
                     RoomName = bed.Room.RoomName,
-                    Description = bed.Room.Description
+                    Description = bed.Room.Description,
+                    Accommodation = new AccommodationView()
+                    {
+                        Id = bed.Room.Accommodation.Id,
+                        AccommodationName = bed.Room.Accommodation.AccommodationName,
+                        Address = bed.Room.Accommodation.Address,
+                        Description = bed.Room.Accommodation.Description
+                    }
                 }
-
             };
             return result;
         }
